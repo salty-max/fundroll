@@ -1,0 +1,14 @@
+{
+  "type": "postgres",
+  "host": "fundroll_postgres_1",
+  "port": 5432,
+  "username": "root",
+  "password": "root",
+  "database": "fundroll",
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "./src/**/*.entity.ts",
+    "./dist/**/*.entity.js"
+  ]
+}
