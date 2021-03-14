@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
+import { UserEntity } from '../user/user.entity';
 @Entity('transaction')
 export class TransactionEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -12,6 +15,9 @@ export class TransactionEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @Column('text')
   label: string;
@@ -21,4 +27,7 @@ export class TransactionEntity {
 
   @Column('bool')
   income: boolean;
+
+  @ManyToOne((type) => UserEntity, (owner) => owner.transactions)
+  owner: UserEntity;
 }

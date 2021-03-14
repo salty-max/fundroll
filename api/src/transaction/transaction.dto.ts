@@ -1,4 +1,5 @@
 import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { UserRO } from '../user/user.dto';
 
 export class TransactionDTO {
   @IsString()
@@ -9,4 +10,14 @@ export class TransactionDTO {
 
   @IsBoolean()
   income: boolean;
+}
+
+export class TransactionRO {
+  id?: string;
+  updatedAt: Date;
+  createdAt: Date;
+  label: string;
+  amount: number;
+  income: boolean;
+  owner: UserRO;
 }
