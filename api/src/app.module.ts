@@ -7,9 +7,10 @@ import { AppService } from './app.service';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { TransactionModule } from './transaction/transaction.module';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), TransactionModule],
+  imports: [TypeOrmModule.forRoot(), TransactionModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,

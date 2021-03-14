@@ -14,7 +14,7 @@ import { ValidationPipe } from '../shared/validation.pipe';
 import { TransactionDTO } from './transaction.dto';
 import { TransactionService } from './transaction.service';
 
-@Controller('transaction')
+@Controller('api/transactions')
 export class TransactionController {
   private logger = new Logger('TransactionController');
 
