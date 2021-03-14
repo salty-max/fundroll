@@ -53,7 +53,9 @@ export class UserEntity {
   }
 
   private get token() {
-    const { id, username } = this;
-    return jwt.sign({ id, username }, process.env.SECRET, { expiresIn: '7d' });
+    const { id, username, email } = this;
+    return jwt.sign({ id, username, email }, process.env.SECRET, {
+      expiresIn: '7d',
+    });
   }
 }
