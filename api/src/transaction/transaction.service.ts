@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -24,16 +24,42 @@ export class TransactionService {
   }
 
   async read(id: string) {
-    return await this.transactionRepository.findOne({ where: { id } });
+    const transaction = await this.transactionRepository.findOne({
+      where: { id },
+    });
+
+    if (!transaction) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+    return transaction;
   }
 
   async update(id: string, data: Partial<TransactionDTO>) {
+    let transaction = await this.transactionRepository.findOne({
+      where: { id },
+    });
+
+    if (!transaction) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+
     await this.transactionRepository.update({ id }, data);
-    return await this.transactionRepository.findOne({ where: { id } });
+    transaction = await this.transactionRepository.findOne({
+      where: { id },
+    });
+    return transaction;
   }
 
   async destroy(id: string) {
+    const transaction = await this.transactionRepository.findOne({
+      where: { id },
+    });
+
+    if (!transaction) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+
     await this.transactionRepository.delete({ id });
-    return { deleted: true };
+    return transaction;
   }
 }
